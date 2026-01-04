@@ -13,6 +13,7 @@ const resultImage = document.getElementById('resultImage');
 const resultMeta = document.getElementById('resultMeta');
 const errorText = document.getElementById('errorText');
 const exampleBtns = document.querySelectorAll('.example-btn');
+const downloadBtn = document.getElementById('downloadBtn');
 
 // ================================
 // Event Listeners
@@ -58,6 +59,11 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             });
         }
     });
+});
+
+// Download button
+downloadBtn.addEventListener('click', () => {
+    downloadSpectrogram();
 });
 
 // ================================
@@ -171,6 +177,25 @@ document.addEventListener('DOMContentLoaded', () => {
             showError('Cannot connect to API server');
         });
 });
+
+// ================================
+// Download Functionality
+// ================================
+function downloadSpectrogram() {
+    const imgSrc = resultImage.src;
+    if (!imgSrc || imgSrc === '') {
+        showError('No spectrogram to download');
+        return;
+    }
+
+    // Create download link
+    const link = document.createElement('a');
+    link.href = imgSrc;
+    link.download = `azerbaijani_tts_spectrogram_${Date.now()}.png`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
 
 // ================================
 // Utility Functions
