@@ -16,6 +16,26 @@ Azerbaijani is spoken by over 30 million people worldwide, yet remains significa
 
 ---
 
+## 🚀 Getting Started
+
+Want to try the application right away? See **[docs/QUICKSTART.md](docs/QUICKSTART.md)** for Docker setup instructions.
+
+**Quick commands:**
+```bash
+# Start with Docker Compose (recommended)
+docker-compose up -d --build
+
+# Access the web interface
+open http://localhost:8000
+
+# Check health
+curl http://localhost:8000/health
+```
+
+For detailed deployment options, see [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md).
+
+---
+
 ## ⚠️ Proof of Concept: Current Limitations and Future Potential
 
 ### **Important Notice: This is a Demonstration Project**
