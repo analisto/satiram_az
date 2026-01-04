@@ -3,7 +3,8 @@
 # Python 3.9+
 
 # Core Data Science
-# numpy and pandas versions will be auto-resolved by TTS and librosa dependencies
+# IMPORTANT: NumPy must be <2.0 for matplotlib compatibility
+numpy<2.0.0,>=1.19.0
 scipy>=1.10.0
 
 # Audio Processing

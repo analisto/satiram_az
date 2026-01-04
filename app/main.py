@@ -17,6 +17,7 @@ from pathlib import Path
 import logging
 
 from .model import SimpleTTS, synthesize_speech, CharacterEncoder
+from .vocoder import synthesize_audio_from_mel
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -210,6 +211,61 @@ async def synthesize_image(request: SynthesisRequest):
         raise HTTPException(status_code=500, detail=f"Synthesis failed: {str(e)}")
 
 
+@app.post("/api/synthesize/audio")
+async def synthesize_audio(request: SynthesisRequest):
+    """
+    Synthesize speech and return as WAV audio file
+
+    Args:
+        request: SynthesisRequest containing text
+
+    Returns:
+        WAV audio file
+    """
+    if not model or not char_encoder:
+        raise HTTPException(status_code=503, detail="Model not loaded")
+
+    if not request.text or len(request.text.strip()) == 0:
+        raise HTTPException(status_code=400, detail="Text cannot be empty")
+
+    try:
+        logger.info(f"Synthesizing audio for: {request.text[:50]}...")
+
+        # Generate mel spectrogram
+        mel_spectrogram = synthesize_speech(
+            text=request.text,
+            model=model,
+            char_encoder=char_encoder,
+            device=device,
+            max_len=request.max_length
+        )
+
+        logger.info(f"Generated mel spectrogram: {mel_spectrogram.shape}")
+
+        # Convert mel spectrogram to audio
+        wav_bytes = synthesize_audio_from_mel(
+            mel_spectrogram,
+            sample_rate=16000,
+            n_fft=1024,
+            hop_length=256
+        )
+
+        logger.info(f"Generated audio: {len(wav_bytes)} bytes")
+
+        # Return as WAV file
+        return StreamingResponse(
+            io.BytesIO(wav_bytes),
+            media_type="audio/wav",
+            headers={
+                "Content-Disposition": f"attachment; filename=azerbaijani_tts_{request.text[:20]}.wav"
+            }
+        )
+
+    except Exception as e:
+        logger.error(f"Audio synthesis failed: {e}")
+        raise HTTPException(status_code=500, detail=f"Audio synthesis failed: {str(e)}")
+
+
 @app.get("/api/stats")
 async def get_stats():
     """Get model statistics"""
@@ -224,7 +280,8 @@ async def get_stats():
         "vocab_size": char_encoder.vocab_size,
         "n_mels": 80,
         "device": str(device),
-        "max_text_length": 200
+        "max_text_length": 200,
+        "vocoder": "Griffin-Lim (librosa)"
     }
 
 

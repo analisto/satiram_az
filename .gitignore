@@ -17,7 +17,6 @@ azerbaijani_asr_data/
 
 # Model artifacts (tracked via Git LFS in .gitattributes)
 # artifacts/*.pt files are tracked by Git LFS
-# Keep char_encoder.pkl (small file, tracked normally)
 *.pickle
 *.h5
 *.hdf5

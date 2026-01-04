@@ -574,33 +574,52 @@ body {
 }
 
 /* ================================
-   Info Note & Result Actions
+   Audio Player
    ================================ */
-.info-note {
+.audio-player-container {
+    margin-bottom: var(--spacing-lg);
+}
+
+.audio-player {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-lg);
+}
+
+.audio-player-header {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     gap: var(--spacing-sm);
-    padding: var(--spacing-md);
-    background: #eff6ff;
-    border: 1px solid #bfdbfe;
-    border-radius: var(--radius-md);
     margin-bottom: var(--spacing-md);
-    font-size: 0.95rem;
-    color: #1e40af;
+    color: white;
 }
 
-.info-icon {
-    width: 20px;
-    height: 20px;
-    flex-shrink: 0;
-    margin-top: 2px;
+.audio-icon {
+    width: 24px;
+    height: 24px;
 }
 
+.audio-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+}
+
+.audio-element {
+    width: 100%;
+    border-radius: var(--radius-md);
+    outline: none;
+}
+
+/* ================================
+   Result Actions
+   ================================ */
 .result-actions {
     display: flex;
     gap: var(--spacing-sm);
     justify-content: center;
     margin: var(--spacing-md) 0;
+    flex-wrap: wrap;
 }
 
 /* ================================

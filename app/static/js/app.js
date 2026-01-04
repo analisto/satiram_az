@@ -13,7 +13,10 @@ const resultImage = document.getElementById('resultImage');
 const resultMeta = document.getElementById('resultMeta');
 const errorText = document.getElementById('errorText');
 const exampleBtns = document.querySelectorAll('.example-btn');
-const downloadBtn = document.getElementById('downloadBtn');
+const downloadImageBtn = document.getElementById('downloadImageBtn');
+const downloadAudioBtn = document.getElementById('downloadAudioBtn');
+const audioElement = document.getElementById('audioElement');
+const audioPlayerContainer = document.getElementById('audioPlayerContainer');
 
 // ================================
 // Event Listeners
@@ -61,9 +64,13 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Download button
-downloadBtn.addEventListener('click', () => {
+// Download buttons
+downloadImageBtn.addEventListener('click', () => {
     downloadSpectrogram();
+});
+
+downloadAudioBtn.addEventListener('click', () => {
+    downloadAudio();
 });
 
 // ================================
@@ -114,6 +121,9 @@ async function synthesizeSpeech() {
         resultImage.src = imageUrl;
         resultMeta.textContent = `Generated ${maxLength} frames`;
 
+        // Generate audio in parallel
+        generateAudio(text, maxLength);
+
         // Hide loading, show result
         loadingState.style.display = 'none';
         resultSection.style.display = 'block';
@@ -128,6 +138,49 @@ async function synthesizeSpeech() {
         showError(error.message || 'An error occurred during synthesis');
     } finally {
         synthesizeBtn.disabled = false;
+    }
+}
+
+// ================================
+// Audio Generation
+// ================================
+async function generateAudio(text, maxLength) {
+    try {
+        console.log('Generating audio...');
+
+        // Call audio endpoint
+        const response = await fetch('/api/synthesize/audio', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                text: text,
+                max_length: maxLength
+            })
+        });
+
+        if (!response.ok) {
+            throw new Error('Audio generation failed');
+        }
+
+        // Get audio blob
+        const audioBlob = await response.blob();
+        const audioUrl = URL.createObjectURL(audioBlob);
+
+        // Set audio source and show player
+        audioElement.src = audioUrl;
+        audioPlayerContainer.style.display = 'block';
+        downloadAudioBtn.style.display = 'inline-flex';
+
+        console.log('Audio generated successfully');
+
+    } catch (error) {
+        console.error('Audio generation error:', error);
+        // Don't show error to user - image synthesis already succeeded
+        // Just hide the audio player
+        audioPlayerContainer.style.display = 'none';
+        downloadAudioBtn.style.display = 'none';
     }
 }
 
@@ -192,6 +245,22 @@ function downloadSpectrogram() {
     const link = document.createElement('a');
     link.href = imgSrc;
     link.download = `azerbaijani_tts_spectrogram_${Date.now()}.png`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
+
+function downloadAudio() {
+    const audioSrc = audioElement.src;
+    if (!audioSrc || audioSrc === '') {
+        showError('No audio to download');
+        return;
+    }
+
+    // Create download link
+    const link = document.createElement('a');
+    link.href = audioSrc;
+    link.download = `azerbaijani_tts_audio_${Date.now()}.wav`;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
