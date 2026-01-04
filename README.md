@@ -982,6 +982,29 @@ This project is built upon the **LocalDoc/azerbaijani_asr dataset**, a comprehen
 
 ---
 
+## Acknowledgments
+
+We would like to express our sincere gratitude to **[LocalDoc](https://huggingface.co/LocalDoc)** and all their contributors for their invaluable open source initiative in creating and maintaining the azerbaijani_asr dataset.
+
+**Special Recognition:**
+- **LocalDoc Team**: For their dedication to advancing Azerbaijani language technology and making high-quality speech data freely available to researchers and developers
+- **Dataset Contributors**: All individuals who contributed to collecting, annotating, and curating the 351,000+ audio samples totaling 334 hours of Azerbaijani speech
+- **Open Source Community**: For their commitment to democratizing access to language resources for underserved languages
+
+**Impact of Their Work:**
+
+The LocalDoc team's initiative has:
+- ✅ **Enabled Research**: Provided foundation for Azerbaijani TTS and ASR development
+- ✅ **Reduced Barriers**: Made it possible to build language technology without expensive data collection
+- ✅ **Advanced Accessibility**: Helped bring voice technology to the 30+ million Azerbaijani speakers worldwide
+- ✅ **Fostered Innovation**: Created opportunities for developers, researchers, and entrepreneurs to build Azerbaijani language applications
+
+By making this dataset openly available, LocalDoc has significantly lowered the barrier to entry for Azerbaijani language AI research and demonstrated the power of open source collaboration in advancing technology for low-resource languages.
+
+**Thank you** for your contribution to the global AI and NLP community.
+
+---
+
 ## Project Artifacts
 
 All technical artifacts, including trained models, configuration files, and detailed metrics, are preserved in the project repository:
