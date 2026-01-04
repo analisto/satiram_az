@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: azerbaijani-tts
+    env: docker
+    healthCheckPath: /health
+    # Increase timeouts for model loading
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT --timeout-keep-alive 120
+    envVars:
+      - key: PORT
+        value: 8000
+      - key: WEB_CONCURRENCY
+        value: 1
+    # Important: Allow more time for startup (model loading)
+    plan: free
+    # Health check settings
+    autoDeploy: true
+    # Docker configuration
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
