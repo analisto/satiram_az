@@ -723,9 +723,9 @@ These side-by-side comparisons of **target** (ground truth) vs. **predicted** me
 
 While not perfect pixel-by-pixel matches (which would indicate overfitting), the predictions capture the **essential characteristics** needed for intelligible, natural-sounding speech. This proof-of-concept quality is:
 
-✅ **Sufficient for beta testing** with select users
-✅ **Demonstrates technical viability** for stakeholder buy-in
-✅ **Establishes baseline** for measuring future improvements
+- ✅ **Sufficient for beta testing** with select users
+- ✅ **Demonstrates technical viability** for stakeholder buy-in
+- ✅ **Establishes baseline** for measuring future improvements
 
 ---
 
