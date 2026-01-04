@@ -1,0 +1,7 @@
+{
+  "avg_test_loss": 55.61408972422282,
+  "std_test_loss": 12.653016342858223,
+  "min_test_loss": 28.387920379638672,
+  "max_test_loss": 98.71955871582031,
+  "num_test_samples": 300
+}

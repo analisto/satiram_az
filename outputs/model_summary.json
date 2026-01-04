@@ -1,0 +1,38 @@
+{
+  "project": "Azerbaijani TTS Model",
+  "timestamp": "2026-01-04T16:49:31.873186",
+  "dataset": {
+    "total_samples": 2000,
+    "train_samples": 1400,
+    "val_samples": 300,
+    "test_samples": 300,
+    "sample_rate": 16000,
+    "n_mels": 80
+  },
+  "model": {
+    "architecture": "Seq2Seq with Attention",
+    "total_parameters": 7200209,
+    "vocab_size": 124,
+    "device": "cpu"
+  },
+  "training": {
+    "epochs_trained": 28,
+    "batch_size": 8,
+    "learning_rate": 0.001,
+    "best_epoch": 27,
+    "best_val_loss": 36.228043606406764,
+    "final_train_loss": 36.86119627816336,
+    "final_val_loss": 36.23918774253443
+  },
+  "evaluation": {
+    "test_loss_mean": 55.61408972422282,
+    "test_loss_std": 12.653016342858223,
+    "test_loss_min": 28.387920379638672,
+    "test_loss_max": 98.71955871582031
+  },
+  "artifacts": {
+    "best_model": "artifacts/best_model.pt",
+    "final_model": "artifacts/final_model.pt",
+    "char_encoder": "artifacts/char_encoder.pkl"
+  }
+}
