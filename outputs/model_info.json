@@ -1,8 +1,0 @@
-{
-  "architecture": "Seq2Seq with Attention",
-  "total_params": 7200209,
-  "trainable_params": 7200209,
-  "vocab_size": 124,
-  "n_mels": 80,
-  "device": "cpu"
-}
