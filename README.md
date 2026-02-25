@@ -1,7 +1,7 @@
 # Satiram.az — Marketplace Business Intelligence Report
 
-> **Scope:** 6,457 active listings scraped from satiram.az on 25 February 2026
-> **Audience:** Executive team, product owners, growth and operations leads
+- > **Scope:** 6,457 active listings scraped from satiram.az on 25 February 2026
+- > **Audience:** Executive team, product owners, growth and operations leads
 
 ---
 
